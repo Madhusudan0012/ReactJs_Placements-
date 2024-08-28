@@ -1,26 +1,28 @@
-import { Children } from "react"
-function customRender(reactelement , container){
-    const domelement = document.createElement(reactElement.type)
-    domelement.innerHTML
-}
+function customRender(reactElement, container) {
+    const domElement = document.createElement(reactElement.type);
+    
+    // Set the text content (or you could use innerHTML if you trust the content)
+    domElement.textContent = reactElement.children;
+
+    // Set attributes if they exist
+    if (reactElement.props.href) {
+        domElement.setAttribute('href', reactElement.props.href);
+    }
+    if (reactElement.props.target) {
+        domElement.setAttribute('target', reactElement.props.target);
+    }
+
+    container.appendChild(domElement);
+} 
 
 const reactElement = {
-    type: 'a' ,
-    props : {
-        //object
+    type: 'a',
+    props: {
         href: "https://google.com",
         target: '_blank'
-
     },
-    Children : 'Click me to visit google'
-}
+    children: 'Click me to visit Google'
+};
 
-
-
-
-const maincontainer = document.querySelector('#root')
-//root 
-//render
-//method to render 
-
-customRender(reactElement, maincontainer)
+const mainContainer = document.querySelector('#root');
+customRender(reactElement, mainContainer);
