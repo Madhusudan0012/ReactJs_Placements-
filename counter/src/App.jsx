@@ -8,9 +8,7 @@ function App() {
   let counter = 15;
 
   const  addvalue = () =>{
-    console.log("value added" , Math.random());
-
-
+    counter = counter +1;
   }
 
   return (
@@ -19,7 +17,7 @@ function App() {
     <h2> Counter Value {counter}</h2>
 
 
-      <button onclick={addvalue}> Add value</button>
+      <button onClick={addvalue}> Add value</button>
       <br/>
       <button> decrease value</button>
       </>
