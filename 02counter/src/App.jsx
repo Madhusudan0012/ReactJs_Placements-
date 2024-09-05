@@ -5,12 +5,15 @@ import './App.css'
 
 function App() {
 
-   let   [counter , setCounter]  = useState(50)
+   let   [counter , setCounter]  = useState(1)
   
   // let counter = 15
 
   const addValue = () => {
-    setCounter(counter+1)
+    setCounter((prevCounter)=> prevCounter+1)
+    setCounter((prevcounter) => prevcounter+1)
+    setCounter((prevcounter) => prevcounter+1)
+    setCounter((prevcounter) => prevcounter+1)
     console.log("clicked" , counter);
 
     console.log("Value Added" , counter);
