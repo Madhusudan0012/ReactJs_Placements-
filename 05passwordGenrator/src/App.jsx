@@ -1,45 +1,79 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-import {forwardRef, useState} from 'react'
-import { useCallback} from'react'
+import React, { useState, useCallback } from 'react';
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const [length , setLength] = useState(8);
-  // eslint-disable-next-line no-unused-vars
-  const [numberAllowed , setNumberAllowed] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const[charAllowed  , setCharAllowed] = useState(false);
+  const [length, setLength] = useState(8);
+  const [numberAllowed, setNumberAllowed] = useState(false);
+  const [charAllowed, setCharAllowed] = useState(false);
+  const [password, setPassword] = useState("");
 
-  // eslint-disable-next-line no-unused-vars
-  const[Password , setPassword] = useState("")
-
-  // eslint-disable-next-line no-unused-vars
-  const passwordGenerator = useCallback(()=>{
-    let pass = ""
-    let Str = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z"
-    if(numberAllowed) str+="0123456789"
-    if(charAllowed) str+= "!@#$%%^&*()_+"
-
-    for (let i = 1; i <= array.length; i++) {
-      let char = Math.floor(Math.random()*str.length+1)
-      pass = str.charAt(char)
-      
+  const passwordGenerator = useCallback(() => {
+    let pass = "";
+    let Str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    
+    if (numberAllowed) Str += "0123456789";
+    if (charAllowed) Str += "!@#$%^&*()_+";
+    
+    for (let i = 0; i < length; i++) {
+      let charIndex = Math.floor(Math.random() * Str.length);
+      pass += Str.charAt(charIndex);
     }
-    setPassword(pass)
-
-
-  } , [length , numberAllowed, charAllowed, setPassword])
-
-  
+    
+    setPassword(pass);
+  }, [numberAllowed, charAllowed, length]);
 
   return (
-    <>
-    <div className= 'w-full-max-w-md-auto shadow-md rounded-lg px-4 my-8 text-orange-500 bg-gra\-'>
-      test 
+    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-800 p-4'>
+      <div className='w-full max-w-md bg-gray-900 p-6 rounded-lg shadow-lg'>
+        <h1 className='text-2xl font-bold text-orange-500 mb-4'>Password Generator</h1>
+        <div className='mb-4'>
+          <label className='block text-gray-200 mb-2'>
+            Length:
+            <input
+              type="number"
+              value={length}
+              onChange={(e) => setLength(Number(e.target.value))}
+              min="1"
+              className='ml-2 p-2 border border-gray-600 rounded-md'
+            />
+          </label>
+        </div>
+        <div className='mb-4'>
+          <label className='flex items-center text-gray-200'>
+            <input
+              type="checkbox"
+              checked={numberAllowed}
+              onChange={() => setNumberAllowed(!numberAllowed)}
+              className='mr-2'
+            />
+            Include numbers
+          </label>
+        </div>
+        <div className='mb-4'>
+          <label className='flex items-center text-gray-200'>
+            <input
+              type="checkbox"
+              checked={charAllowed}
+              onChange={() => setCharAllowed(!charAllowed)}
+              className='mr-2'
+            />
+            Include special characters
+          </label>
+        </div>
+        <button 
+          onClick={passwordGenerator}
+          className='bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600'
+        >
+          Generate Password
+        </button>
+        {password && (
+          <div className='mt-4 p-2 bg-gray-700 text-gray-200 rounded-lg'>
+            <p className='font-medium'>Password:</p>
+            <p className='break-all'>{password}</p>
+          </div>
+        )}
+      </div>
     </div>
-    </>
-  )
+  );
 }
 
-export default App
+export default App;
