@@ -1,31 +1,31 @@
 /* eslint-disable no-unused-vars */
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Layout from './Layout'
+import Layout from './Layout.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './components/Home/home'
-import About from './components/About/About'
+import about from './components/About/About.jsx'
+import Home from './components/Home/home.jsx'
 
-const router = createBrowserRouter({
+const router = createBrowserRouter([{
   path : '/',
   element : <Layout/>,
   children : [
     {
       path: "",
-      element: <Home/>
+      element: <home/>
 
     }, 
     {
       path: "about",
-      element: <About/>
+      element: <about/>
     },
     
   ] 
-})
+}])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider/>
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
