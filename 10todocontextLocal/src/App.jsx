@@ -4,12 +4,13 @@
 
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Todoprovider } from './Contexts';
+import {TodoProvider } from './Contexts';
 import {TodoForm} from './Components/todoform';
 import { TodoItem } from './Components';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
+  const[todos , setTodos] = useState([])
 
   const addTodo = (todo) =>{
     setTodos((prev) => [ {id : Date.now(), ...todo} , ...prev])
@@ -47,7 +48,7 @@ function App() {
 
 
   return (
-    <Todoprovider value = {{todos , addTodo , updateTodo , deleteTodo , toggleComplete}}>
+    <TodoProvider value = {{todos , addTodo , updateTodo , deleteTodo , toggleComplete}}>
     <div className="bg-[#172842] min-h-screen py-8">
     <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
         <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
@@ -68,7 +69,7 @@ function App() {
         </div>
     </div>
 </div>
-</Todoprovider>
+</TodoProvider>
   )
 }
 
